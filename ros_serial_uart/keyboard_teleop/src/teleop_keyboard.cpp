@@ -107,12 +107,12 @@ int main(int argc, char **argv)
 void Teleop::keyLoop()
 {
     char c;
-    bool dirty = false;
 
     puts("Reading from keyboard");
     puts("----------------------------------------------");
     puts("Use arrow keys to move the robot. 'q' to quit.");
 
+    linear_ = angular_ = 0;
     for (;;)
     {
         try
@@ -125,7 +125,6 @@ void Teleop::keyLoop()
             return;
         }
 
-        linear_ = angular_ = 0;
         ROS_DEBUG("value: 0x%02X\n", c);
 
         switch (c)
@@ -133,22 +132,18 @@ void Teleop::keyLoop()
         case KEYCODE_LEFT:
             ROS_DEBUG("LEFT");
             angular_ = 1.0;
-            dirty = true;
             break;
         case KEYCODE_RIGHT:
             ROS_DEBUG("RIGHT");
             angular_ = -1.0;
-            dirty = true;
             break;
         case KEYCODE_UP:
             ROS_DEBUG("UP");
             linear_ = 1.0;
-            dirty = true;
             break;
         case KEYCODE_DOWN:
             ROS_DEBUG("DOWN");
             linear_ = -1.0;
-            dirty = true;
             break;
         case KEYCODE_Q:
             ROS_DEBUG("quit");
@@ -158,11 +153,8 @@ void Teleop::keyLoop()
         geometry_msgs::Twist twist;
         twist.angular.z = a_scale_ * angular_;
         twist.linear.x = l_scale_ * linear_;
-        if (dirty == true)
-        {
-            twist_pub_.publish(twist);
-            dirty = false;
-        }
+
+        twist_pub_.publish(twist);
     }
     return;
 }
