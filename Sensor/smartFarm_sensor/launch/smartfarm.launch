@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find laser_filters)/launch/rplidar_anglelimit.launch"/>
+    <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
+    <include file="$(find hector_mapping)/launch/slam.launch"/>
+    <node pkg="rviz" type="rviz" name="rviz"/>
+    <node pkg="smartFarm_sensor" type="origin_pub" name="origin_pub" output="screen"/>
+    <node pkg="tf" type="static_transform_publisher" name="tf_broadcaster" args="0.05 0 0.05 0 0 0 1 /base_footprint /laser 100" />
+</launch>
