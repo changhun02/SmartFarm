@@ -11,7 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   geometry_msgs
+  sensor_msgs
   nav_msgs
+  laser_geometry
   tf
 )
 
@@ -137,6 +139,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/SmartFarm_sensor_node.cpp)
 add_executable(origin_pub src/origin_to_pose.cpp)
+add_executable(laser_to_pc2 src/lidar_to_pc2.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -154,6 +157,10 @@ add_executable(origin_pub src/origin_to_pose.cpp)
 # )
 
 target_link_libraries(origin_pub
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(laser_to_pc2
   ${catkin_LIBRARIES}
 )
 

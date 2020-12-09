@@ -29,6 +29,6 @@ int main(int argc, char **argv)
    {
       ros::spinOnce();
       loop_rate.sleep();
-      ROS_INFO("X : %f Y : %f Z : %f", x, y, z);
+      //ROS_INFO("X : %f Y : %f Z : %f", x, y, z);
    }
 }
