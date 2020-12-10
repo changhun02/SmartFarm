@@ -5,6 +5,7 @@
 #include "geometry_msgs/Twist.h"
 #include "serial/serial.h"
 #include "cstdlib"
+#include "string.h"
 #include "stdlib.h"
 #include "math.h"
 #include "stdio.h"
@@ -35,8 +36,6 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg)
     uint8_t cmdBuff[8];
     unsigned short check_sum;
 
-
-
     cmdBuff[0] = '$';
     cmdBuff[1] = 3;                           //Binary "0000 0011": 로봇 스피드와 스티어링 데이터 사용
     cmdBuff[2] = 5;                           // Data Payload Length + Checksum Length
@@ -48,8 +47,6 @@ void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg)
 
     cmdBuff[6] = (check_sum >> 8) & 0x00FF;
     cmdBuff[7] = check_sum & 0x00FF;
-
-
 
     for(int i = 0; i < 8 ; i++)
         printf("%x,", cmdBuff[i]);
@@ -72,10 +69,12 @@ int main (int argc, char** argv)
     ros::Publisher read_pub = nh.advertise<std_msgs::String>("read", 1000);
 
     ros::Subscriber goal_vel = nh.subscribe("cmd_vel",1000,cmd_vel_callback);
+    std::string port;
+    nh.param<std::string>("port", port, "/dev/ttyUSB0");
 
     try
     {
-        ser.setPort("/dev/ttyUSB1");
+        ser.setPort(port);
         ser.setBaudrate(115200);
         serial::Timeout to = serial::Timeout::simpleTimeout(1000);
         ser.setTimeout(to);

@@ -136,6 +136,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(serial_uart src/serial_uart.cpp)
+ add_executable(serial_stm_uart src/serial_stm_uart.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,7 +152,9 @@ include_directories(
  target_link_libraries(serial_uart
    ${catkin_LIBRARIES}
  )
-
+target_link_libraries(serial_stm_uart
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
