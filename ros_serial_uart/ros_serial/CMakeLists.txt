@@ -155,6 +155,7 @@ include_directories(
 target_link_libraries(serial_stm_uart
   ${catkin_LIBRARIES}
 )
+
 #############
 ## Install ##
 #############
