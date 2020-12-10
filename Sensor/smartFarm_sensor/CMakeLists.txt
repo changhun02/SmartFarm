@@ -14,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   nav_msgs
   laser_geometry
+  people_msgs
+  pcl_ros
   tf
 )
 
@@ -140,7 +142,7 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/SmartFarm_sensor_node.cpp)
 add_executable(origin_pub src/origin_to_pose.cpp)
 add_executable(laser_to_pc2 src/lidar_to_pc2.cpp)
-
+add_executable(people_pos src/people_pos.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -161,6 +163,10 @@ target_link_libraries(origin_pub
 )
 
 target_link_libraries(laser_to_pc2
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(people_pos
   ${catkin_LIBRARIES}
 )
 
