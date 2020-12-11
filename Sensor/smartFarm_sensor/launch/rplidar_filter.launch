@@ -1,5 +1,6 @@
 <launch>
     <include file="$(find laser_filters)/launch/rplidar_anglelimit.launch"/>
+    <include file="$(find laser_filters)/launch/rplidar_objlimit.launch"/>
     <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
     <node pkg="rviz" type="rviz" name="rviz"/>
     <node pkg="tf" type="static_transform_publisher" name="tf_broadcaster" args="0.05 0 0.05 0 0 0 1 /base_footprint /laser 100" />

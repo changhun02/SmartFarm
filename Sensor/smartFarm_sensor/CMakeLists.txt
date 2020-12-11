@@ -143,6 +143,8 @@ include_directories(
 add_executable(origin_pub src/origin_to_pose.cpp)
 add_executable(laser_to_pc2 src/lidar_to_pc2.cpp)
 add_executable(people_pos src/people_pos.cpp)
+add_executable(lidar_object_detect src/lidar_object_detect.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -167,6 +169,10 @@ target_link_libraries(laser_to_pc2
 )
 
 target_link_libraries(people_pos
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(lidar_object_detect
   ${catkin_LIBRARIES}
 )
 

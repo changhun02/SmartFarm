@@ -1,3 +1,5 @@
+// This Package will not use
+
 #include <ros/ros.h>
 #include "laser_geometry/laser_geometry.h"
 #include "sensor_msgs/LaserScan.h"
@@ -13,7 +15,7 @@ sensor_msgs::PointCloud2 laser2cloudmsg(sensor_msgs::LaserScan laser){
    return pc2_dst;
 }
 
-void lidar_callback(sensor_msgs::LaserScan laser){
+void lidar_callback(const sensor_msgs::LaserScan laser){
   changed_pc2 = laser2cloudmsg(laser);
 }
 
