@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "lidar_object_detect");
   ros::NodeHandle nh;
   ros::Subscriber range_sub = nh.subscribe("/scan_obj_filtered", 1, range_callback);
-  ros::Publisher obj_pub = nh.advertise<geometry_msgs::Point32>("obj_pose", 1000);;
+  ros::Publisher obj_pub = nh.advertise<geometry_msgs::Point32>("obj_pos", 1000);;
   ros::Rate rate(10);
 
   while(ros::ok()){
